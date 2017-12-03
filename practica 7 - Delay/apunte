@@ -1,0 +1,16 @@
+;F CPU -> 20MHz
+;ciclos que toma ins
+; iteraciones
+
+ldi R0,n ;1
+nxt: dec R0
+brne nxt
+
+#ciclos = 3n
+T=1/F
+delay=100us
+100us/1/20MHz = 2000 = #ciclos
+
+
+#anidado
+# 1+1n+n(1+m+2m-1)+2n-1+10

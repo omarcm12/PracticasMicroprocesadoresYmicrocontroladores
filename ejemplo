@@ -1,0 +1,38 @@
+#include<avr/io.h>
+
+void delay( void )
+{
+  volatile unsigned char i,j;
+
+ 	 i=0x7f;
+	  do{
+	    j=0x3f;
+		while(--j);
+	  }while(--i);
+
+}
+
+signed char up;  
+
+int main( void )
+{
+
+  	/* init Timer0 as Fast PWM 				*/ 
+   	TCCR0A = 0x83;  /* Clr OC0A  Fast Mode 	*/
+    TCCR0B = 0x01;  /* prescaler 			*/
+	OCR0A = 0;  	/* set PWM    			*/
+	DDRB |= (1<<PB7);
+
+    up=4;
+  	while(1){    
+
+    	if( OCR0A < 4)		up=2;
+		if( OCR0A > 0xf8) 	up=-2;		
+	
+		delay();	
+		OCR0A+=up;
+
+  	}
+  
+  return 0;
+}
